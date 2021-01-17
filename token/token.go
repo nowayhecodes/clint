@@ -21,6 +21,7 @@ const (
 	MINUS   = "-"
 	MULT    = "*"
 	DIV     = "/"
+	MOD     = "%"
 	POW     = "^"
 	COMMA   = ","
 	COLON   = ":"
@@ -31,6 +32,6 @@ const (
 	RBRACE  = "}"
 	MODULE  = "MODULE"
 	CLASS   = "CLASS"
-	FUN     = "FUNCTION"
+	FUN     = "FUN"
 	LET     = "LET"
 )
