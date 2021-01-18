@@ -23,6 +23,8 @@ const (
 	DIV     = "/"
 	MOD     = "%"
 	POW     = "^"
+	LTHEN   = "<"
+	GTHEN   = ">"
 	COMMA   = ","
 	COLON   = ":"
 	SEMI    = ";"
@@ -36,6 +38,11 @@ const (
 	CLASS   = "CLASS"
 	FUN     = "FUN"
 	LET     = "LET"
+	EQ      = "EQUAL"
+	NOT     = "NOT"
+	AND     = "AND"
+	OR      = "OR"
+	RETURN  = "RETURN"
 )
 
 var keywords = map[string]TokenType{
@@ -43,6 +50,10 @@ var keywords = map[string]TokenType{
 	"class":  CLASS,
 	"fun":    FUN,
 	"let":    LET,
+	"equal":  EQ,
+	"not":    NOT,
+	"and":    AND,
+	"or":     OR,
 }
 
 // LookupIdent ...
