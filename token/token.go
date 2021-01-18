@@ -21,16 +21,34 @@ const (
 	MINUS   = "-"
 	MULT    = "*"
 	DIV     = "/"
+	MOD     = "%"
 	POW     = "^"
 	COMMA   = ","
 	COLON   = ":"
 	SEMI    = ";"
+	TELL    = "!"
+	ASK     = "?"
 	LPAREN  = "("
 	RPAREN  = ")"
 	LBRACE  = "{"
 	RBRACE  = "}"
 	MODULE  = "MODULE"
 	CLASS   = "CLASS"
-	FUN     = "FUNCTION"
+	FUN     = "FUN"
 	LET     = "LET"
 )
+
+var keywords = map[string]TokenType{
+	"module": MODULE,
+	"class":  CLASS,
+	"fun":    FUN,
+	"let":    LET,
+}
+
+// LookupIdent ...
+func LookupIdent(ident string) TokenType {
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
+}
