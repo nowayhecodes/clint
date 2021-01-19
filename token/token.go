@@ -43,6 +43,10 @@ const (
 	AND     = "AND"
 	OR      = "OR"
 	RETURN  = "RETURN"
+	IF      = "IF"
+	ELSE    = "ELSE"
+	TRUE    = "TRUE"
+	FALSE   = "FALSE"
 )
 
 var keywords = map[string]TokenType{
@@ -54,6 +58,11 @@ var keywords = map[string]TokenType{
 	"not":    NOT,
 	"and":    AND,
 	"or":     OR,
+	"return": RETURN,
+	"if":     IF,
+	"else":   ELSE,
+	"true":   TRUE,
+	"false":  FALSE,
 }
 
 // LookupIdent ...
