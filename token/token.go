@@ -23,6 +23,8 @@ const (
 	DIV     = "/"
 	MOD     = "%"
 	POW     = "^"
+	EQ      = "=="
+	NOTEQ   = "!="
 	LTHEN   = "<"
 	GTHEN   = ">"
 	COMMA   = ","
@@ -38,7 +40,7 @@ const (
 	CLASS   = "CLASS"
 	FUN     = "FUN"
 	LET     = "LET"
-	EQ      = "EQUAL"
+	EQUAL   = "EQUAL"
 	NOT     = "NOT"
 	AND     = "AND"
 	OR      = "OR"
@@ -54,7 +56,7 @@ var keywords = map[string]TokenType{
 	"class":  CLASS,
 	"fun":    FUN,
 	"let":    LET,
-	"equal":  EQ,
+	"equal":  EQUAL,
 	"not":    NOT,
 	"and":    AND,
 	"or":     OR,
