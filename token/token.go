@@ -39,7 +39,8 @@ const (
 	MODULE  = "MODULE"
 	CLASS   = "CLASS"
 	FUN     = "FUN"
-	LET     = "LET"
+	VAR     = "VAR"
+	VALUE   = "VALUE"
 	EQUAL   = "EQUAL"
 	NOT     = "NOT"
 	AND     = "AND"
@@ -55,7 +56,8 @@ var keywords = map[string]TokenType{
 	"module": MODULE,
 	"class":  CLASS,
 	"fun":    FUN,
-	"let":    LET,
+	"var":    VAR,
+	"val":    VALUE,
 	"equal":  EQUAL,
 	"not":    NOT,
 	"and":    AND,
