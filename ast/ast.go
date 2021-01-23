@@ -31,6 +31,17 @@ func (vStmt *VarStatement) statementNode() {}
 // TokenLiteral ...
 func (vStmt *VarStatement) TokenLiteral() string { return vStmt.Token.Literal }
 
+// ReturnStatement ...
+type ReturnStatement struct {
+	Token       token.Token // token.RETURN
+	ReturnValue Expression
+}
+
+func (rs *ReturnStatement) statementNode() {}
+
+// TokenLiteral ...
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
+
 // Identifier ...
 type Identifier struct {
 	Token token.Token // token.IDENT
