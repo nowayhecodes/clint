@@ -72,7 +72,13 @@ func (l *Lexer) NextToken() token.Token {
 	case ',':
 		tok = newToken(token.COMMA, l.ch)
 	case ':':
-		tok = newToken(token.COLON, l.ch)
+		if l.peekChar() == ':' {
+			ch := l.ch
+			l.readChar()
+			tok = token.Token{Type: token.MODACCESSOR, Literal: string(ch) + string(l.ch)}
+		} else {
+			tok = newToken(token.COLON, l.ch)
+		}
 	case ';':
 		tok = newToken(token.SEMI, l.ch)
 	case '(':
