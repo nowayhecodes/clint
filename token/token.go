@@ -28,6 +28,7 @@ const (
 	LTHEN       = "<"
 	GTHEN       = ">"
 	COMMA       = ","
+	COLON       = ":"
 	MODACCESSOR = "::"
 	SEMI        = ";"
 	TELL        = "!"
