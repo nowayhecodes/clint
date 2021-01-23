@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestNextToken(t *testing.T) {
+func TestNextToken(test *testing.T) {
 	input := `var five = 5;
 	var ten = 10;
 	var add = fun(x, y) {
@@ -111,11 +111,11 @@ func TestNextToken(t *testing.T) {
 		tok := l.NextToken()
 
 		if tok.Type != tt.expectedType {
-			t.Fatalf("tests[%d] - wrong tokentype. expected=%q, got=%q", i, tt.expectedType, tok.Type)
+			test.Fatalf("tests[%d] - wrong tokentype. expected=%q, got=%q", i, tt.expectedType, tok.Type)
 		}
 
 		if tok.Literal != tt.expectedLiteral {
-			t.Fatalf("tests[%d] - wrong literal. expected=%q, got=%q", i, tt.expectedLiteral, tok.Literal)
+			test.Fatalf("tests[%d] - wrong literal. expected=%q, got=%q", i, tt.expectedLiteral, tok.Literal)
 		}
 	}
 }

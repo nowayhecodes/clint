@@ -1,5 +1,7 @@
 package ast
 
+import "clint/token"
+
 // Node ...
 type Node interface {
 	TokenLiteral() string
@@ -16,6 +18,29 @@ type Expression interface {
 	Node
 	expressionNode()
 }
+
+// VarStatement ...
+type VarStatement struct {
+	Token token.Token // token.VAR
+	Name  *Identifier
+	Value Expression
+}
+
+func (vStmt *VarStatement) statementNode() {}
+
+// TokenLiteral ...
+func (vStmt *VarStatement) TokenLiteral() string { return vStmt.Token.Literal }
+
+// Identifier ...
+type Identifier struct {
+	Token token.Token // token.IDENT
+	Value string
+}
+
+func (id *Identifier) expressionNode() {}
+
+// TokenLiteral ...
+func (id *Identifier) TokenLiteral() string { return id.Token.Literal }
 
 // Program ...
 type Program struct {
