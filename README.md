@@ -1,7 +1,9 @@
 <div align="center">
-<img src="asset/clint-1.jpg">
+    <img width="400" height="400" src="asset/clint.png">
 </div>
 
+<div align="center">
+    <h1>The Clint programming language</h1>
+</div>
 
-
-# clint
+It's interpreter is written in Go
