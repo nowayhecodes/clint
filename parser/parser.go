@@ -5,6 +5,7 @@ import (
 	"clint/lexer"
 	"clint/token"
 	"fmt"
+	"strconv"
 )
 
 type (
@@ -58,6 +59,7 @@ func New(l *lexer.Lexer) *Parser {
 
 	p.prefixParseFns = make(map[token.TokenType]prefixParseFn)
 	p.registerPrefix(token.IDENT, p.parseIdentifier)
+	p.registerPrefix(token.INT, p.parseIntegerLiteral)
 
 	// Read token two times, so currentToken & peekToken are both set
 	p.nextToken()
@@ -158,6 +160,21 @@ func (p *Parser) parseExpression(precedence int) ast.Expression {
 
 func (p *Parser) parseIdentifier() ast.Expression {
 	return &ast.Identifier{Token: p.currentToken, Value: p.currentToken.Literal}
+}
+
+func (p *Parser) parseIntegerLiteral() ast.Expression {
+	intLiteral := &ast.IntegerLiteral{Token: p.currentToken}
+
+	value, err := strconv.ParseInt(p.currentToken.Literal, 0, 64)
+
+	if err != nil {
+		msg := fmt.Sprintf("could not parse %q as integer", p.currentToken.Literal)
+		p.errors = append(p.errors, msg)
+		return nil
+	}
+
+	intLiteral.Value = value
+	return intLiteral
 }
 
 func (p *Parser) currentTokenIs(t token.TokenType) bool { return p.currentToken.Type == t }

@@ -33,7 +33,6 @@ func (expStmt *ExpressionStatement) statementNode() {}
 
 // TokenLiteral ...
 func (expStmt *ExpressionStatement) TokenLiteral() string { return expStmt.Token.Literal }
-
 func (expStmt *ExpressionStatement) String() string {
 	if expStmt.Expression != nil {
 		return expStmt.Expression.String()
@@ -52,7 +51,6 @@ func (vStmt *VarStatement) statementNode() {}
 
 // TokenLiteral ...
 func (vStmt *VarStatement) TokenLiteral() string { return vStmt.Token.Literal }
-
 func (vStmt *VarStatement) String() string {
 	var out bytes.Buffer
 
@@ -78,7 +76,6 @@ func (rs *ReturnStatement) statementNode() {}
 
 // TokenLiteral ...
 func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
-
 func (rs *ReturnStatement) String() string {
 	var out bytes.Buffer
 
@@ -102,8 +99,19 @@ func (id *Identifier) expressionNode() {}
 
 // TokenLiteral ...
 func (id *Identifier) TokenLiteral() string { return id.Token.Literal }
+func (id *Identifier) String() string       { return id.Value }
 
-func (id *Identifier) String() string { return id.Value }
+// IntegerLiteral ...
+type IntegerLiteral struct {
+	Token token.Token
+	Value int64
+}
+
+func (intLiteral *IntegerLiteral) expressionNode() {}
+
+// TokenLiteral ...
+func (intLiteral *IntegerLiteral) TokenLiteral() string { return intLiteral.Token.Literal }
+func (intLiteral *IntegerLiteral) String() string       { return intLiteral.Token.Literal }
 
 // Program ...
 type Program struct {
