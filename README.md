@@ -1,4 +1,4 @@
-![Go](https://github.com/nowayhecodes/clint/workflows/Go/badge.svg?branch=main)
+![Test](https://github.com/nowayhecodes/clint/workflows/Test/badge.svg)
 [![HitCount](http://hits.dwyl.com/nowayhecodes/clint.svg)](http://hits.dwyl.com/nowayhecodes/clint)
 
 <div align="center">
