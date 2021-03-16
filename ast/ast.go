@@ -29,6 +29,24 @@ type ExpressionStatement struct {
 	Expression Expression
 }
 
+type PrefixExpression struct {
+	Token     token.Token
+	Operator  string
+	RightHand Expression
+}
+
+func (prefix *PrefixExpression) expressionNode()      {}
+func (prefix *PrefixExpression) TokenLiteral() string { return prefix.Token.Literal }
+func (prefix *PrefixExpression) String() string {
+	var out bytes.Buffer
+	out.WriteString("(")
+	out.WriteString(prefix.Operator)
+	out.WriteString(prefix.RightHand.String())
+	out.WriteString(")")
+
+	return out.String()
+}
+
 func (expStmt *ExpressionStatement) statementNode() {}
 
 // TokenLiteral ...

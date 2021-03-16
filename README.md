@@ -1,3 +1,7 @@
+![Go](https://github.com/nowayhecodes/clint/workflows/Go/badge.svg?branch=main)
+![Stars](https://img.shields.io/github/stars/nowayhecodes/clint)
+![Forks](https://img.shields.io/github/forks/nowayhecodes/clint)
+![Issues](https://img.shields.io/github/issues/nowayhecodes/clint)
 ![Test](https://github.com/nowayhecodes/clint/workflows/Test/badge.svg)
 [![HitCount](http://hits.dwyl.com/nowayhecodes/clint.svg)](http://hits.dwyl.com/nowayhecodes/clint)
 [![time tracker](https://wakatime.com/badge/github/nowayhecodes/clint.svg)](https://wakatime.com/badge/github/nowayhecodes/clint)
