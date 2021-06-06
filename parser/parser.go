@@ -69,6 +69,31 @@ func New(l *lexer.Lexer) *Parser {
 	return p
 }
 
+var precedences = map[token.TokenType]int{
+	token.EQ:    EQUALS,
+	token.NOTEQ: EQUALS,
+	token.LTHEN: LESSGREATER,
+	token.GTHEN: LESSGREATER,
+	token.PLUS:  SUM,
+	token.MINUS: SUM,
+	token.DIV:   MULT,
+	token.MULT:  MULT,
+}
+
+func (p *Parser) peekPrecedence() int {
+	if p, ok := precedences[p.peekToken.Type]; ok {
+		return p
+	}
+	return LOWEST
+}
+
+func (p *Parser) curPrecedence() int {
+	if p, ok := precedences[p.currentToken.Type]; ok {
+		return p
+	}
+	return LOWEST
+}
+
 // Errors ...
 func (p *Parser) Errors() []string { return p.errors }
 

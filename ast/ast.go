@@ -47,6 +47,26 @@ func (prefix *PrefixExpression) String() string {
 	return out.String()
 }
 
+type InfixExpression struct {
+	Token     token.Token
+	LeftHand  Expression
+	Operator  string
+	RightHand Expression
+}
+
+func (infix *InfixExpression) expressionNode()      {}
+func (infix *InfixExpression) TokenLiteral() string { return infix.Token.Literal }
+func (infix *InfixExpression) String() string {
+	var out bytes.Buffer
+	out.WriteString("(")
+	out.WriteString(infix.LeftHand.String())
+	out.WriteString(" " + infix.Operator + " ")
+	out.WriteString(infix.RightHand.String())
+	out.WriteString(")")
+
+	return out.String()
+}
+
 func (expStmt *ExpressionStatement) statementNode() {}
 
 // TokenLiteral ...
