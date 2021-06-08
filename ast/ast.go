@@ -151,6 +151,15 @@ func (intLiteral *IntegerLiteral) expressionNode() {}
 func (intLiteral *IntegerLiteral) TokenLiteral() string { return intLiteral.Token.Literal }
 func (intLiteral *IntegerLiteral) String() string       { return intLiteral.Token.Literal }
 
+type Boolean struct {
+	Token token.Token
+	Value bool
+}
+
+func (b *Boolean) expressionNode()      {}
+func (b *Boolean) TokenLiteral() string { return b.Token.Literal }
+func (b *Boolean) String() string       { return b.Token.Literal }
+
 // Program ...
 type Program struct {
 	Statements []Statement
