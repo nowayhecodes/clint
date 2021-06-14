@@ -29,6 +29,17 @@ type ExpressionStatement struct {
 	Expression Expression
 }
 
+func (expStmt *ExpressionStatement) statementNode() {}
+
+// TokenLiteral ...
+func (expStmt *ExpressionStatement) TokenLiteral() string { return expStmt.Token.Literal }
+func (expStmt *ExpressionStatement) String() string {
+	if expStmt.Expression != nil {
+		return expStmt.Expression.String()
+	}
+	return ""
+}
+
 type PrefixExpression struct {
 	Token     token.Token
 	Operator  string
@@ -67,15 +78,43 @@ func (infix *InfixExpression) String() string {
 	return out.String()
 }
 
-func (expStmt *ExpressionStatement) statementNode() {}
+type IfExpression struct {
+	Token       token.Token
+	Condition   Expression
+	Consequence *BlockStatement
+	Alternative *BlockStatement
+}
 
-// TokenLiteral ...
-func (expStmt *ExpressionStatement) TokenLiteral() string { return expStmt.Token.Literal }
-func (expStmt *ExpressionStatement) String() string {
-	if expStmt.Expression != nil {
-		return expStmt.Expression.String()
+func (ie *IfExpression) expressionNode()      {}
+func (ie *IfExpression) TokenLiteral() string { return ie.Token.Literal }
+func (ie *IfExpression) String() string {
+	var out bytes.Buffer
+	out.WriteString("if")
+	out.WriteString(ie.Condition.String())
+	out.WriteString(" ")
+	out.WriteString(ie.Consequence.String())
+
+	if ie.Alternative != nil {
+		out.WriteString("else ")
+		out.WriteString(ie.Alternative.String())
 	}
-	return ""
+	return out.String()
+}
+
+type BlockStatement struct {
+	Token      token.Token
+	Statements []Statement
+}
+
+func (bs *BlockStatement) statementNode()       {}
+func (bs *BlockStatement) TokenLiteral() string { return bs.Token.Literal }
+func (bs *BlockStatement) String() string {
+	var out bytes.Buffer
+
+	for _, s := range bs.Statements {
+		out.WriteString(s.String())
+	}
+	return out.String()
 }
 
 // VarStatement ...
