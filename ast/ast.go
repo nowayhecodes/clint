@@ -3,6 +3,7 @@ package ast
 import (
 	"bytes"
 	"clint/token"
+	"strings"
 )
 
 // Node ...
@@ -189,6 +190,32 @@ func (intLiteral *IntegerLiteral) expressionNode() {}
 // TokenLiteral ...
 func (intLiteral *IntegerLiteral) TokenLiteral() string { return intLiteral.Token.Literal }
 func (intLiteral *IntegerLiteral) String() string       { return intLiteral.Token.Literal }
+
+type FunctionLiteral struct {
+	Token      token.Token
+	Parameters []*Identifier
+	Body       *BlockStatement
+}
+
+func (funl *FunctionLiteral) expressionNode()      {}
+func (funl *FunctionLiteral) TokenLiteral() string { return funl.Token.Literal }
+func (funl *FunctionLiteral) String() string {
+	var out bytes.Buffer
+
+	params := []string{}
+
+	for _, p := range funl.Parameters {
+		params = append(params, p.String())
+	}
+
+	out.WriteString(funl.TokenLiteral())
+	out.WriteString("(")
+	out.WriteString(strings.Join(params, ", "))
+	out.WriteString(") ")
+	out.WriteString(funl.Body.String())
+
+	return out.String()
+}
 
 type Boolean struct {
 	Token token.Token
