@@ -102,6 +102,17 @@ func (ie *IfExpression) String() string {
 	return out.String()
 }
 
+type CallExpression struct {
+	Token     token.Token
+	Function  Expression
+	Arguments []Expression
+}
+
+func (callExp *CallExpression) expressionNode()      {}
+func (callExp *CallExpression) TokenLiteral() string { return callExp.Token.Literal }
+
+// TODO: *CallExpression String()
+
 type BlockStatement struct {
 	Token      token.Token
 	Statements []Statement
