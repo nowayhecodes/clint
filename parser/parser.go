@@ -77,6 +77,7 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerInfix(token.NOTEQ, p.parseInfixExpression)
 	p.registerInfix(token.LTHEN, p.parseInfixExpression)
 	p.registerInfix(token.GTHEN, p.parseInfixExpression)
+	p.registerInfix(token.LPAREN, p.parseCallExpression)
 
 	// Read token two times, so currentToken & peekToken are both set
 	p.nextToken()
@@ -86,14 +87,15 @@ func New(l *lexer.Lexer) *Parser {
 }
 
 var precedences = map[token.TokenType]int{
-	token.EQ:    EQUALS,
-	token.NOTEQ: EQUALS,
-	token.LTHEN: LESSGREATER,
-	token.GTHEN: LESSGREATER,
-	token.PLUS:  SUM,
-	token.MINUS: SUM,
-	token.DIV:   MULT,
-	token.MULT:  MULT,
+	token.EQ:     EQUALS,
+	token.NOTEQ:  EQUALS,
+	token.LTHEN:  LESSGREATER,
+	token.GTHEN:  LESSGREATER,
+	token.LPAREN: CALL,
+	token.PLUS:   SUM,
+	token.MINUS:  SUM,
+	token.DIV:    MULT,
+	token.MULT:   MULT,
 }
 
 func (p *Parser) peekPrecedence() int {
@@ -147,6 +149,36 @@ func (p *Parser) parseGroupedExpression() ast.Expression {
 	}
 
 	return exp
+}
+
+func (p *Parser) parseCallExpression(fn ast.Expression) ast.Expression {
+	exp := &ast.CallExpression{Token: p.currentToken, Function: fn}
+	exp.Arguments = p.parseCallArguments()
+	return exp
+}
+
+func (p *Parser) parseCallArguments() []ast.Expression {
+	args := []ast.Expression{}
+
+	if p.peekTokenIs(token.RPAREN) {
+		p.nextToken()
+		return args
+	}
+
+	p.nextToken()
+	args = append(args, p.parseExpression(LOWEST))
+
+	for p.peekTokenIs(token.COMMA) {
+		p.nextToken()
+		p.nextToken()
+		args = append(args, p.parseExpression(LOWEST))
+	}
+
+	if !p.expectPeek(token.RPAREN) {
+		return nil
+	}
+
+	return args
 }
 
 func (p *Parser) parseStatement() ast.Statement {
