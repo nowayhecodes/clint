@@ -110,8 +110,21 @@ type CallExpression struct {
 
 func (callExp *CallExpression) expressionNode()      {}
 func (callExp *CallExpression) TokenLiteral() string { return callExp.Token.Literal }
+func (callExp *CallExpression) String() string {
+	var out bytes.Buffer
+	args := []string{}
 
-// TODO: *CallExpression String()
+	for _, arg := range callExp.Arguments {
+		args = append(args, arg.String())
+	}
+
+	out.WriteString(callExp.Function.String())
+	out.WriteString("(")
+	out.WriteString(strings.Join(args, ", "))
+	out.WriteString(")")
+
+	return out.String()
+}
 
 type BlockStatement struct {
 	Token      token.Token
